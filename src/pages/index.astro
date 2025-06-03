@@ -1,16 +1,49 @@
 ---
+import { getCollection } from "astro:content";
+import Layout from "../layouts/Layout.astro";
 
+const allProjects = await getCollection("projects");
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+	<main class="w-full sm:max-w-3xl mx-auto my-8 px-4">
+		<h1 class="text-3xl sm:text-4xl font-bold m-auto mb-6 text-center">
+			The Humans of seycove
+		</h1>
+		{
+			allProjects.map((project) => (
+				<a
+					href={`/projects/${project.slug}`}
+					class="flex flex-col sm:flex-row bg-white rounded-xl border-2 border-slate-200 shadow-md mb-6 hover:shadow-lg transition-shadow overflow-hidden"
+				>
+					<div class="w-full sm:w-auto sm:flex-shrink-0 flex justify-center sm:justify-start p-4">
+						{project.data.cover ? (
+							<img
+								src={project.data.cover.src}
+								alt={`Photo of ${project.data.author}`}
+								class="h-48 sm:h-auto sm:max-h-46 sm:w-auto w-full max-w-full object-cover rounded-lg border-2 border-slate-200"
+							/>
+						) : (
+							<div class="h-48 w-full max-w-[200px] sm:w-46 sm:h-46 bg-gray-200 flex items-center justify-center border-2">
+								<span class="text-gray-500 text-xl">
+									{project.data.author?.charAt(0) || "?"}
+								</span>
+							</div>
+						)}
+					</div>
+					<div class="p-6 sm:flex-grow">
+						<p class="text-sm text-gray-600">
+							{project.data.author}
+						</p>
+						<h2 class="text-xl font-semibold text-gray-800">
+							{project.data.title}
+						</h2>
+						<p class="text-gray-600 mt-2 line-clamp-2">
+							{project.data.summary}
+						</p>
+					</div>
+				</a>
+			))
+		}
+	</main>
+</Layout>
