@@ -1,7 +1,7 @@
 ---
 author: "John Doe"
 title: "Test Document"
-cover: ./inspo.png
+cover: ./images/inspo.png
 summary: "This is a test document to demonstrate Markdown syntax."
 ---
 

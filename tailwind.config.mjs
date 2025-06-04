@@ -2,7 +2,11 @@
 export default {
   content: [],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        serif: ['Neuton', 'serif'],
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),

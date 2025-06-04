@@ -3,28 +3,52 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 
 const allProjects = await getCollection("projects");
+
+const randomProject =
+	allProjects[Math.floor(Math.random() * allProjects.length)];
 ---
 
 <Layout>
+	<div class="max-w-4xl mx-auto px-8 my-8">
+		<div class="text-6xl font-serif text-center text-gray-800 mb-4">
+			The Humans of Seycove
+		</div>
+	</div>
 	<main class="w-full sm:max-w-3xl mx-auto my-8 px-4">
-		<h1 class="text-3xl sm:text-4xl font-bold m-auto mb-6 text-center">
-			The Humans of seycove
-		</h1>
+		<div class="mb-8">
+			<p class="text-lg text-gray-700 mb-8 text-center italic">
+				How can we use storytelling to build community?
+			</p>
+			<article class="prose prose-stone max-w-3xl mx-auto mb-8">
+				project writeup
+			</article>
+		</div>
+		<hr class="mb-8 w-full border-t border-stone-200" />
+		<div class="flex flex-col items-center-safe m-auto w-60">
+			<button
+				class="bg-stone-600 mx-auto text-white px-4 py-2 rounded-lg mb-1 hover:bg-blue-700 transition-colors w-full"
+				onclick={`window.location.href='projects/${randomProject.slug}'`}
+			>
+				See a random story
+			</button>
+			<p class="font-serif italic mb-1">or</p>
+			<p class="text-2xl font-serif mb-4">Browse the collection:</p>
+		</div>
 		{
 			allProjects.map((project) => (
 				<a
 					href={`/projects/${project.slug}`}
-					class="flex flex-col sm:flex-row bg-white rounded-xl border-2 border-slate-200 shadow-md mb-6 hover:shadow-lg transition-shadow overflow-hidden"
+					class="flex flex-col sm:flex-row bg-white rounded-xl border-1 border-slate-200 shadow-md mb-6 hover:shadow-lg hover:border-slate-300 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
 				>
 					<div class="w-full sm:w-auto sm:flex-shrink-0 flex justify-center sm:justify-start p-4">
 						{project.data.cover ? (
 							<img
 								src={project.data.cover.src}
 								alt={`Photo of ${project.data.author}`}
-								class="h-48 sm:h-auto sm:max-h-46 sm:w-auto w-full max-w-full object-cover rounded-lg border-2 border-slate-200"
+								class="h-32 sm:h-auto sm:max-h-32 sm:w-auto w-full max-w-full object-cover rounded-lg border-1 border-slate-200"
 							/>
 						) : (
-							<div class="h-48 w-full max-w-[200px] sm:w-46 sm:h-46 bg-gray-200 flex items-center justify-center border-2">
+							<div class="h-32 w-full max-w-[200px] sm:w-46 sm:h-32 bg-gray-200 flex items-center justify-center border-2">
 								<span class="text-gray-500 text-xl">
 									{project.data.author?.charAt(0) || "?"}
 								</span>
