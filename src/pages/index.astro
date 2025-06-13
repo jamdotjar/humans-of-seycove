@@ -6,11 +6,13 @@ const allProjects = await getCollection("projects");
 
 const randomProject =
 	allProjects[Math.floor(Math.random() * allProjects.length)];
+
+const url = import.meta.url;
 ---
 
 <Layout>
 	<div class="max-w-4xl mx-auto px-8 my-8">
-		<div class="text-6xl font-serif text-center text-gray-800 mb-4">
+		<div class="text-6xl text-center font-serif text-gray-800 mb-4">
 			The Humans of Seycove
 		</div>
 	</div>
@@ -25,30 +27,30 @@ const randomProject =
 		</div>
 		<hr class="mb-8 w-full border-t border-stone-200" />
 		<div class="flex flex-col items-center-safe m-auto w-60">
-			<button
-				class="bg-stone-600 mx-auto text-white px-4 py-2 rounded-lg mb-1 hover:bg-blue-700 transition-colors w-full"
-				onclick={`window.location.href='projects/${randomProject.slug}'`}
+			<a
+				class="underline underline-offset-2 font-serif flex justify-center text-l text-center italic"
+				href={`/projects/${randomProject.slug}`}
 			>
-				See a random story
-			</button>
+				See a random project
+			</a>
 			<p class="font-serif italic mb-1">or</p>
 			<p class="text-2xl font-serif mb-4">Browse the collection:</p>
 		</div>
 		{
-			allProjects.map((project) => (
+			allProjects.slice(0, 4).map((project) => (
 				<a
 					href={`/projects/${project.slug}`}
-					class="flex flex-col sm:flex-row bg-white rounded-xl border-1 border-slate-200 shadow-md mb-6 hover:shadow-lg hover:border-slate-300 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+					class="flex flex-col sm:flex-row bg-stone-50 rounded-xl border-1 border-stone-200 shadow-md mb-6 hover:shadow-lg hover:border-stone-300 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
 				>
 					<div class="w-full sm:w-auto sm:flex-shrink-0 flex justify-center sm:justify-start p-4">
 						{project.data.cover ? (
 							<img
 								src={project.data.cover.src}
 								alt={`Photo of ${project.data.author}`}
-								class="h-32 sm:h-auto sm:max-h-32 sm:w-auto w-full max-w-full object-cover rounded-lg border-1 border-slate-200"
+								class="h-32 sm:h-auto sm:max-h-32 sm:w-auto w-full max-w-full object-cover rounded-lg border-1 border-stone-200"
 							/>
 						) : (
-							<div class="h-32 w-full max-w-[200px] sm:w-46 sm:h-32 bg-gray-200 flex items-center justify-center border-2">
+							<div class="h-32 w-full max-w-[200px] sm:w-46 sm:h-32 bg-stone-200 flex items-center justify-center border-2">
 								<span class="text-gray-500 text-xl">
 									{project.data.author?.charAt(0) || "?"}
 								</span>
@@ -69,5 +71,12 @@ const randomProject =
 				</a>
 			))
 		}
+
+		<button
+			class="font-serif flex justify-center text-l text-center italic bg-stone-600 mx-auto text-white px-4 py-2 rounded-lg mb-1 hover:bg-stone-700 transition-colors w-full"
+			onclick={`window.location.href='projects'`}
+		>
+			See all projects
+		</button>
 	</main>
 </Layout>
