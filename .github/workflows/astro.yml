@@ -33,7 +33,7 @@ jobs:
         run: pnpm install
       
       - name: Approve pnpm build scripts
-        run: pnpm --yes approve-builds
+        run: pnpm approve-builds
       
       - name: Build and upload your site
         uses: withastro/action@v3
