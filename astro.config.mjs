@@ -10,6 +10,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-
+  site: 'https://humans-of-seycove.finnh.ca',
   integrations: [mdx()]
 });
