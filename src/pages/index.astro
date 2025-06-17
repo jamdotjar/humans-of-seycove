@@ -1,6 +1,11 @@
 ---
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+import bts1image from "../images/bts1.png";
+import bts2image from "../images/bts2.png";
+import bts3image from "../images/bts3.png";
+import bts4image from "../images/bts4.png";
 
 const allProjects = await getCollection("projects");
 
@@ -18,65 +23,109 @@ const url = import.meta.url;
 	</div>
 	<main class="w-full sm:max-w-3xl mx-auto my-8 px-4">
 		<div class="mb-8">
-			<p class="text-lg text-gray-700 mb-8 text-center italic">
-				How can we use storytelling to build community?
-			</p>
 			<article class="prose prose-stone max-w-3xl mx-auto mb-8">
-				project writeup
-			</article>
-		</div>
-		<hr class="mb-8 w-full border-t border-stone-200" />
-		<div class="flex flex-col items-center-safe m-auto w-60">
-			<a
-				class="underline underline-offset-2 font-serif flex justify-center text-l text-center italic"
-				href={`/projects/${randomProject.slug}`}
-			>
-				See a random project
-			</a>
-			<p class="font-serif italic mb-1">or</p>
-			<p class="text-2xl font-serif mb-4">Browse the collection:</p>
-		</div>
-		{
-			allProjects.slice(0, 4).map((project) => (
-				<a
-					href={`/projects/${project.slug}`}
-					class="flex flex-col sm:flex-row bg-stone-50 rounded-xl border-1 border-stone-200 shadow-md mb-6 hover:shadow-lg hover:border-stone-300 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+				<p>
+					This spring, Ms. Madsen's Composition 10 students took on
+					the challenge of answering the question:
+				</p>
+				<p
+					class="font-serif text-center text-xl font-semibold italic -mb-2 -mt-2"
 				>
-					<div class="w-full sm:w-auto sm:flex-shrink-0 flex justify-center sm:justify-start p-4">
-						{project.data.cover ? (
-							<img
-								src={project.data.cover.src}
-								alt={`Photo of ${project.data.author}`}
-								class="h-32 sm:h-auto sm:max-h-32 sm:w-auto w-full max-w-full object-cover rounded-lg border-1 border-stone-200"
-							/>
-						) : (
-							<div class="h-32 w-full max-w-[200px] sm:w-46 sm:h-32 bg-stone-200 flex items-center justify-center border-2">
-								<span class="text-gray-500 text-xl">
-									{project.data.author?.charAt(0) || "?"}
-								</span>
-							</div>
-						)}
-					</div>
-					<div class="p-6 sm:flex-grow">
-						<p class="text-sm text-gray-600">
-							{project.data.author}
-						</p>
-						<h2 class="text-xl font-semibold text-gray-800">
-							{project.data.title}
-						</h2>
-						<p class="text-gray-600 mt-2 line-clamp-2">
-							{project.data.summary}
-						</p>
-					</div>
+					How can we use storytelling to build community?
+				</p>
+				<p>
+					Inspired by the Humans of New York project, students were
+					challenged to engage in a conversation with someone outside
+					their grade that they might otherwise not talk with. A
+					variety of people from our school community volunteered for
+					the project, allowing students to meet their goal of
+					capturing personal stories in honest, meaningful ways.
+				</p>
+				<p>
+					The project encouraged students to step outside their
+					comfort zones, listen with empathy, and share voices that
+					might otherwise go unheard. Through this work, they helped
+					foster connection, compassion, and a stronger sense of
+					belonging — one story at a time.
+				</p>
+			</article>
+			<div class="relative w-full mb-8">
+				<div class="flex justify-center mt-4 gap-2">
+					<Image
+						src={bts1image}
+						alt="Students interviewing their subjects"
+						class="cursor-pointer w-full h-auto rounded-lg shadow-md mb-4 hover:scale-105 transition-transform duration-200"
+					/>
+					<Image
+						src={bts2image}
+						alt="more interviews for the Humans of Seycove project"
+						class="cursor-pointer w-full h-auto rounded-lg shadow-md mb-4 hover:scale-105 transition-transform duration-200 object-cover"
+					/>
+					<Image
+						src={bts3image}
+						alt="students in the cafeteria talking to their subjects"
+						class="cursor-pointer w-full h-auto rounded-lg shadow-md mb-4 hover:scale-105 transition-transform duration-200"
+					/>
+					<Image
+						src={bts4image}
+						alt="students having a conversation with their subjects"
+						class="cursor-pointer w-full h-auto rounded-lg shadow-md mb-4 hover:scale-105 transition-transform duration-200"
+					/>
+				</div>
+			</div>
+			<hr class="mb-8 w-full border-t border-stone-200" />
+			<div class="flex flex-col items-center-safe m-auto w-60">
+				<a
+					class="underline underline-offset-2 font-serif flex justify-center text-l text-center italic"
+					href={`/projects/${randomProject.slug}`}
+				>
+					See a random project
 				</a>
-			))
-		}
+				<p class="font-serif italic mb-1">or</p>
+				<p class="text-2xl font-serif mb-4">Browse the collection:</p>
+			</div>
+			{
+				allProjects.slice(0, 4).map((project) => (
+					<a
+						href={`/projects/${project.slug}`}
+						class="flex flex-col sm:flex-row bg-stone-50 rounded-xl border-1 border-stone-200 shadow-md mb-6 hover:shadow-lg hover:border-stone-300 hover:-translate-y-1 transition-all duration-200 overflow-hidden"
+					>
+						<div class="w-full sm:w-auto sm:flex-shrink-0 flex justify-center sm:justify-start p-4">
+							{project.data.cover ? (
+								<img
+									src={project.data.cover.src}
+									alt={`Photo of ${project.data.author}`}
+									class="h-48 sm:h-auto min-w-32 sm:max-h-32 sm:w-auto w-full max-w-full object-cover rounded-lg border-1 border-stone-200"
+								/>
+							) : (
+								<div class="h-32 w-full max-w-[200px] sm:w-46 sm:h-32 bg-stone-200 flex items-center justify-center border-2">
+									<span class="text-gray-500 text-xl">
+										{project.data.author?.charAt(0) || "?"}
+									</span>
+								</div>
+							)}
+						</div>
+						<div class="p-6 sm:flex-grow">
+							<p class="text-sm text-gray-600">
+								{project.data.author}
+							</p>
+							<h2 class="text-xl font-semibold text-gray-800">
+								{project.data.title}
+							</h2>
+							<p class="text-gray-600 mt-2 line-clamp-2">
+								{project.data.summary}
+							</p>
+						</div>
+					</a>
+				))
+			}
 
-		<button
-			class="font-serif flex justify-center text-l text-center italic bg-stone-600 mx-auto text-white px-4 py-2 rounded-lg mb-1 hover:bg-stone-700 transition-colors w-full"
-			onclick={`window.location.href='projects'`}
-		>
-			See all projects
-		</button>
+			<button
+				class="font-serif flex justify-center text-l text-center italic bg-stone-600 mx-auto text-white px-4 py-2 rounded-lg mb-1 hover:bg-stone-700 transition-colors w-full"
+				onclick={`window.location.href='projects'`}
+			>
+				See all projects
+			</button>
+		</div>
 	</main>
 </Layout>

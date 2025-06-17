@@ -25,7 +25,7 @@ const allProjects = await getCollection("projects");
                                 <img
                                     src={project.data.cover.src}
                                     alt={`Photo of ${project.data.author}`}
-                                    class="h-32 sm:h-auto sm:max-h-32 sm:w-auto w-full max-w-full object-cover rounded-lg border-1 border-slate-200"
+                                    class="h-32 sm:h-auto sm:max-h-32 sm:w-aut min-w-32 o w-full max-w-full object-cover rounded-lg border-1 border-slate-200"
                                 />
                             ) : (
                                 <div class="h-32 w-full max-w-[200px] sm:w-46 sm:h-32 bg-gray-200 flex items-center justify-center border-2">
